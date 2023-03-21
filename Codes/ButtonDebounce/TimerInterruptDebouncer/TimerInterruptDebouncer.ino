@@ -6,6 +6,8 @@
 // Variables
 const uint8_t buttonPin = 2;  // 2U meaning?...
 uint8_t buttonHistory = 0;
+uint8_t ledState = 0;
+unsigned int counter = 0;
 
 // Function declarations
 volatile void updateButton(uint8_t& buttonHistory, uint8_t buttonPin);
@@ -33,7 +35,11 @@ void setup() {
 
 void loop() {
     if (isButtonPressed(buttonHistory)) {
-        digitalWrite(buttonPin, HIGH);
+        ledState = !ledState;
+        digitalWrite(LED_BUILTIN, ledState);
+
+        counter++;
+        Serial.println(counter);
     }
 }
 
